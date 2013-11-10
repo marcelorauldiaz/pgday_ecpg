@@ -23,11 +23,21 @@ main()
    printf("MENSAJE:%s\n", sqlca.sqlerrm.sqlerrmc);
  }
 
- EXEC SQL SELECT id,nya INTO :asistente_id, :asistente_nya from asistentes where id=2;
+ EXEC SQL DECLARE cursor_asistentes CURSOR FOR SELECT * FROM asistentes;
 
- printf("ID del asistente %d - Apellido y nombre  %s\n", asistente_id, asistente_nya);
+ EXEC SQL OPEN cursor_asistentes;
 
+ while(1)
+ {
+    EXEC SQL FETCH FROM cursor_asistentes INTO :asistente_id, :asistente_nya;
+    if( sqlca.sqlcode != 100 )
+ 	printf("ID del asistente %d - Apellido y nombre  %s\n", asistente_id, asistente_nya);
+    else
+	break;
 
+ }	
+ 
+ EXEC SQL CLOSE cursor_asistentes;
  EXEC SQL DISCONNECT ALL;
 
 
