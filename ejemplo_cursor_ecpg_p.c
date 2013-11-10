@@ -6,7 +6,7 @@
 /* End of automatic include section */
 
 #line 1 "ejemplo_cursor_ecpg.c"
-#include <stdio.h>
+
 
  /* exec sql begin declare section */
      
@@ -56,15 +56,19 @@ if (sqlca.sqlcode < 0) sqlprint();}
  /* declare cursor_asistentes cursor for select * from asistentes */
 #line 26 "ejemplo_cursor_ecpg.c"
 
+ 
+ /* exec sql whenever not found  break ; */
+#line 28 "ejemplo_cursor_ecpg.c"
+
 
  { ECPGdo(__LINE__, 0, 1, NULL, 0, ECPGst_normal, "declare cursor_asistentes cursor for select * from asistentes", ECPGt_EOIT, ECPGt_EORT);
-#line 28 "ejemplo_cursor_ecpg.c"
+#line 30 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlwarn[0] == 'W') sqlprint();
-#line 28 "ejemplo_cursor_ecpg.c"
+#line 30 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlcode < 0) sqlprint();}
-#line 28 "ejemplo_cursor_ecpg.c"
+#line 30 "ejemplo_cursor_ecpg.c"
 
 
  while(1)
@@ -74,41 +78,41 @@ if (sqlca.sqlcode < 0) sqlprint();}
 	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
 	ECPGt_char,(asistente_nya),(long)250,(long)1,(250)*sizeof(char), 
 	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
-#line 32 "ejemplo_cursor_ecpg.c"
+#line 34 "ejemplo_cursor_ecpg.c"
 
-if (sqlca.sqlcode == ECPG_NOT_FOUND) sqlprint();
-#line 32 "ejemplo_cursor_ecpg.c"
+if (sqlca.sqlcode == ECPG_NOT_FOUND) break;
+#line 34 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlwarn[0] == 'W') sqlprint();
-#line 32 "ejemplo_cursor_ecpg.c"
+#line 34 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlcode < 0) sqlprint();}
-#line 32 "ejemplo_cursor_ecpg.c"
+#line 34 "ejemplo_cursor_ecpg.c"
 
-    if( sqlca.sqlcode != 100 )
+  //  if( sqlca.sqlcode != 100 )
  	printf("ID del asistente %d - Apellido y nombre  %s\n", asistente_id, asistente_nya);
-    else
-	break;
+   // else
+//	break;
 
  }	
  
  { ECPGdo(__LINE__, 0, 1, NULL, 0, ECPGst_normal, "close cursor_asistentes", ECPGt_EOIT, ECPGt_EORT);
-#line 40 "ejemplo_cursor_ecpg.c"
+#line 42 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlwarn[0] == 'W') sqlprint();
-#line 40 "ejemplo_cursor_ecpg.c"
+#line 42 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlcode < 0) sqlprint();}
-#line 40 "ejemplo_cursor_ecpg.c"
+#line 42 "ejemplo_cursor_ecpg.c"
 
  { ECPGdisconnect(__LINE__, "ALL");
-#line 41 "ejemplo_cursor_ecpg.c"
+#line 43 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlwarn[0] == 'W') sqlprint();
-#line 41 "ejemplo_cursor_ecpg.c"
+#line 43 "ejemplo_cursor_ecpg.c"
 
 if (sqlca.sqlcode < 0) sqlprint();}
-#line 41 "ejemplo_cursor_ecpg.c"
+#line 43 "ejemplo_cursor_ecpg.c"
 
 
 

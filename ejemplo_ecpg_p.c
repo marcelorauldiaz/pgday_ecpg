@@ -37,7 +37,7 @@
 main()
 {
 
- { ECPGconnect(__LINE__, 0, "pgday@127.0.0.1:5432" , "postgres" , NULL , NULL, 0); 
+ { ECPGconnect(__LINE__, 0, "pgday@127.0.0.1:5432" , "postgres" , NULL , "con1", 0); 
 #line 18 "ejemplo_ecpg.c"
 
 if (sqlca.sqlwarn[0] == 'W') sqlprint();

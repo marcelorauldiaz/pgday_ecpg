@@ -1,4 +1,4 @@
-#include <stdio.h>
+
 
  EXEC SQL BEGIN DECLARE SECTION;
    short int asistente_id;
@@ -24,16 +24,18 @@ main()
  }
 
  EXEC SQL DECLARE cursor_asistentes CURSOR FOR SELECT * FROM asistentes;
+ 
+ EXEC SQL WHENEVER NOT FOUND DO BREAK;
 
  EXEC SQL OPEN cursor_asistentes;
 
  while(1)
  {
     EXEC SQL FETCH FROM cursor_asistentes INTO :asistente_id, :asistente_nya;
-    if( sqlca.sqlcode != 100 )
+  //  if( sqlca.sqlcode != 100 )
  	printf("ID del asistente %d - Apellido y nombre  %s\n", asistente_id, asistente_nya);
-    else
-	break;
+   // else
+//	break;
 
  }	
  

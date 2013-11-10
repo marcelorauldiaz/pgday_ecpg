@@ -15,7 +15,7 @@
 main()
 {
 
- EXEC SQL CONNECT TO pgday@127.0.0.1:5432 USER postgres;
+ EXEC SQL CONNECT TO pgday@127.0.0.1:5432 AS con1 USER postgres;
 
  if (sqlca.sqlcode!=0)
  {
